@@ -1,3 +1,4 @@
+
 version: 0.2
 
 phases:
@@ -6,14 +7,15 @@ phases:
       nodejs: 20
     commands:
       - echo "Installing Node.js dependencies"
-      - cd my-beanstalk-app
-      - npm install
+      - npm install --prefix my-beanstalk-app
 
   build:
     commands:
-      - echo "Build completed successfully"
+      - test -f my-beanstalk-app/package.json
+      - test -f my-beanstalk-app/server.js
+      - echo "Node.js application files verified"
 
 artifacts:
+  base-directory: my-beanstalk-app
   files:
     - '**/*'
-  base-directory: my-beanstalk-app
